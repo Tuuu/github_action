@@ -1,0 +1,31 @@
+name: GitHub Action Test Demo
+on:
+  pull_request:
+    braches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 设置环境
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: setNode
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      # build
+      - name: yarn install, build
+        run: |
+          yarn install
+          yarn build
+      - name: Deploy to Server
+          uses: easingthemes/ssh-deploy@v2.1.5
+          env:
+            SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+            ARGS: "-rltgoDzvO --delete"
+            SOURCE: "build/"
+            REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+            REMOTE_USER: ${{ secrets.REMOTE_USER }}
+            TARGET: ${{ secrets.REMOTE_TARGET }}
