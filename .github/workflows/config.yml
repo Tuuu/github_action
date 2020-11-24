@@ -1,6 +1,6 @@
 name: GitHub Action Test Demo
 on:
-  pull_request:
+  push:
     braches:
       - master
 
