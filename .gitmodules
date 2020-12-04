@@ -1,0 +1,3 @@
+[submodule "src/submodules"]
+	path = src/submodules
+	url = git@personal:Tuuu/github_action_submodules.git

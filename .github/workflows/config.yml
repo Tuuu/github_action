@@ -11,6 +11,8 @@ jobs:
       # 设置环境
       - name: Checkout
         uses: actions/checkout@v2
+          with:
+            - submodules: recursive
       - name: setNode
         uses: actions/setup-node@v1
         with:
